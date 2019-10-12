@@ -29,7 +29,6 @@ public class Event {
 	
 	public Event(String path) throws InvalidPathException {
 		
-		this.path = path;
 		File file = new File(path);
 		
 		if(!file.exists()) {
@@ -37,6 +36,7 @@ public class Event {
 			throw new InvalidPathException();
 		}
 		
+		this.path = path;
 		root = null;
 		first = null;
 	}
@@ -49,7 +49,6 @@ public class Event {
 	 */
 	
 	public String getPath() {
-		
 		return path;
 	}
 	
@@ -94,5 +93,70 @@ public class Event {
 	}
 	
 //Methods
-
+	
+	/**
+	 *<b>Description:</b> This method allows loading the spectator and competitors form a text file.<br>
+	 *<b>Post:</b> The spectators and competitor was loaded.<br>
+	 *<b>Pre:</b> The file must exist.<br>
+	 */
+	
+	public String loadData() {
+		
+		FileReader file;
+		BufferedReader reader;
+		String[] attributes;
+		String line;
+		String msg = "";
+		
+		try{
+			
+			file = new FileReader(path);
+			reader = new BufferedReader(file);
+			attributes = new String[7];
+			
+			while((line = reader.readLine()) != null){
+				
+					attributes = line.split(",");
+					Spectator spectator = new Spectator(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6]);
+					
+					try {
+						
+						addSpectator(spectator);
+					}
+					catch(InvalidIdException e) {
+						
+						msg += e.getMessage() + "\n";
+					}
+			}
+			
+			reader.close();
+		}
+		catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		return msg;
+	}
+	
+	/**
+	 *<b>Description:</b> This method allows adding a spectator in the BST of spectators.<br>
+	 *<b>Post:</b> The spectator was added on the BST of spectators.<br>
+	 *@param spectator The spectator that will be added - spectator != null.
+	 *@throws InvalidIdException If spectator has the same id that other spectator that already is in the BST.
+	 */
+	
+	public void addSpectator(Spectator spectator) throws InvalidIdException {
+		
+		if(root == null) {
+			
+			root = spectator;
+		}
+		else {
+			
+			root.addSpectator(spectator);
+		}
+	}
 }

@@ -28,5 +28,4 @@ public class Competitor extends Person {
 		next = null;
 		prev = null;
 	}
-
 }
