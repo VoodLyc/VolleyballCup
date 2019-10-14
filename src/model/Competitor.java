@@ -29,6 +29,18 @@ public class Competitor extends Person {
 		prev = null;
 	}
 	
+//Setters
+	
+	/**
+	 * <b>Description:</b> This method allows setting the attribute prev.<br>
+	 * <b>Post:</b> The attribute prev will be replaced by the one that enters by parameter.<br>
+	 * @param prev The new prev.
+	 */
+	
+	public void setPrev(Competitor prev) {
+		this.prev = prev;
+	}
+	
 //Methods
 	
 	/**
@@ -42,7 +54,7 @@ public class Competitor extends Person {
 		if(next == null) {
 			
 			next = competitor;
-			competitor.prev = this;
+			competitor.setPrev(this);
 		}
 		else {
 			

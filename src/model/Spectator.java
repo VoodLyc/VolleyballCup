@@ -34,6 +34,26 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		rightChild = null;
 	}
 	
+//Getters
+	
+	/**
+	 * <b>Description:</b> This method allows returning the attribute leftChild.<br>
+	 * @return The attribute leftChild.
+	 */
+
+	public Spectator getLeftChild() {
+		return leftChild;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows returning the attribute rightChild.<br>
+	 * @return The attribute rightChild.
+	 */
+
+	public Spectator getRightChild() {
+		return rightChild;
+	}
+	
 //Methods
 	
 	/**
@@ -136,5 +156,44 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		}
 		
 		return spectator1;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting a random spectator of the BST of spectators.<br>
+	 * @return a random spectator of the BST of spectators.
+	 */
+	
+	public Spectator selectRandomSpectator() {
+		
+		Spectator spectator;
+		
+		if((int)(Math.random() * 100) >= 10) {
+			
+			spectator = this;
+		}
+		else if((int)(Math.random() * 100) >= 50) {
+			
+			if(leftChild != null) {
+				
+				spectator = leftChild.selectRandomSpectator();
+			}
+			else {
+				
+				spectator = this;
+			}
+		}
+		else {
+			
+			if(rightChild != null) {
+				
+				spectator = rightChild.selectRandomSpectator();
+			}
+			else {
+				
+				spectator = this;
+			}
+		}
+		
+		return spectator;
 	}
 }

@@ -192,9 +192,71 @@ public class Event {
 			
 			spectator = new Spectator(id, "", "", "", "", "", "");
 			spectator = root.getSpectatorById(spectator);
+			
 			if(spectator != null) {
 				spectator = new Spectator(spectator.getId(), spectator.getFirstName(), spectator.getLastName(), spectator.getEmail(), spectator.getGender(), spectator.getNationality(), spectator.getBirthdate());
 			}
+		}
+		
+		return spectator;
+	}	
+	
+	/**
+	 * <b>Description:</b> This method allows getting the spectator's successor in the BST of spectators.<br>
+	 * @param spectator The spectator that do you want to find the successor - spectator != null. 
+	 * @return The successor of the spectator if it exists, otherwise, it returns to the spectator.
+	 */
+	
+	public Spectator getSuccessor(Spectator spectator) {
+		
+		Spectator successor = null;
+				
+		if(spectator.getLeftChild() == null) {
+			
+			successor = spectator;
+		}
+		else {
+			
+			successor = getSuccessor(spectator.getLeftChild());
+		}
+		
+		return successor;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting the spectator's predecessor in the BST of spectators.<br>
+	 * @param spectator The spectator that do you want to find the predecessor - spectator != null. 
+	 * @return The predecessor of the spectator if it exists, otherwise, it returns to the spectator.
+	 */
+	
+	public Spectator getPredecessor(Spectator spectator) {
+		
+		Spectator predecessor = null;
+				
+		if(spectator.getRightChild() == null) {
+			
+			predecessor = spectator;
+		}
+		else {
+			
+			predecessor = getPredecessor(spectator.getRightChild());
+		}
+		
+		return predecessor;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting a random spectator of the BST of spectators.<br>
+	 * @return a random spectator of the BST of spectators, if the BST is empty, return null.
+	 */
+	
+	public Spectator selectRandomSpectator() {
+		
+		Spectator spectator = null;
+		
+		if(root != null) {
+			
+			spectator = root.selectRandomSpectator();
 		}
 		
 		return spectator;
