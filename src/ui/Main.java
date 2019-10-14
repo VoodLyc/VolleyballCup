@@ -1,8 +1,8 @@
 package ui;
 
 /**
-*<b>Description:</b> The class Main in the package ui.<br>
-*@author Johan Giraldo.
+* <b>Description:</b> The class Main in the package ui.<br>
+* @author Johan Giraldo.
 */
 
 public class Main {
