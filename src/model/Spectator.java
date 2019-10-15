@@ -120,7 +120,7 @@ public class Spectator extends Person implements Comparable <Spectator> {
 	
 	/**
 	 * <b>Description:</b> This method allows getting a spectator of the BST of spectators.<br> 
-	 * @param spectator The spectator with the id.
+	 * @param spectator The spectator with the id - spectator != null.
 	 * @return The spectator if it could be found, null if not.
 	 */
 	
@@ -138,10 +138,6 @@ public class Spectator extends Person implements Comparable <Spectator> {
 				
 				spectator1 = rightChild.getSpectatorById(spectator);
 			}
-			else {
-				
-				spectator1 = null;
-			}
 		}
 		else if(this.compareTo(spectator) == -1) {
 			
@@ -149,13 +145,42 @@ public class Spectator extends Person implements Comparable <Spectator> {
 				
 				spectator1 = leftChild.getSpectatorById(spectator);
 			}
-			else {
-				
-				spectator1 = null;
-			}
 		}
 		
 		return spectator1;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting the spectator's father.<br> 
+	 * @param spectator The spectator that do you want to find the father - spectator != null.
+	 * @param root The spectator's father, initially should be null.
+	 * @return The spectator's father if it could be found, null if not.
+	 */
+	
+	public Spectator getFather(Spectator spectator, Spectator root) {
+		
+		Spectator father = null;
+		
+		if(this.compareTo(spectator) == 0) {
+			
+			father = root;
+		}
+		else if(this.compareTo(spectator) == 1) {
+			
+			if(rightChild != null) {
+				
+				father = rightChild.getFather(spectator, this);
+			}
+		}
+		else if(this.compareTo(spectator) == -1) {
+			
+			if(leftChild != null) {
+				
+				father = leftChild.getFather(spectator, this);
+			}
+		}
+		
+		return father;
 	}
 	
 	/**
@@ -195,5 +220,27 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		}
 		
 		return spectator;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting a the BST of spectators size.<br>
+	 * @param root The root of the BST of spectators.
+	 * @return the BST of spectators size.
+	 */
+	
+	public int getSizeBST(Spectator root) {
+		
+		int size = 0;
+		
+		if(root == null) {
+			
+			size = 0;
+		}
+		else {
+			
+			size = 1 + getSizeBST(root.leftChild) + getSizeBST(root.rightChild);
+		}
+		
+		return size;
 	}
 }

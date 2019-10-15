@@ -180,7 +180,7 @@ public class Event {
 	
 	/**
 	 * <b>Description:</b> This method allows getting a spectator of the BST of spectators by the id.<br> 
-	 * @param id The spectator's id.
+	 * @param id The spectator's id - spectator != null.
 	 * @return The spectator if it could be found or null if it couldn't be found.
 	 */
 	
@@ -260,5 +260,40 @@ public class Event {
 		}
 		
 		return spectator;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting the spectator's father.<br> 
+	 * @param spectator The spectator that do you want to find the father - spectator != null.
+	 * @return The spectator's father if it could be found, null if not.
+	 */
+	
+	public Spectator getFather(Spectator spectator) {
+		
+		Spectator father = null;
+		
+		if(root != null) {
+			
+			father = root.getFather(spectator, null);
+		}
+		
+		return father;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting a the BST of spectators size.<br>
+	 * @return the BST of spectators size.
+	 */
+	
+	public int getSizeBST() {
+		
+		int size = 0;
+		
+		if(root != null) {
+			
+			size = root.getSizeBST(root);
+		}
+		
+		return size;
 	}
 }
