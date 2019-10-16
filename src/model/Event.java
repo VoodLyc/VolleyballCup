@@ -75,7 +75,6 @@ public class Event {
 	/**
 	 * <b>Description:</b> This method allows setting the attribute root.<br>
 	 * <b>Post:</b> The attribute root will be replaced by the one that enters by parameter.<br>
-	 * @param root The new root.
 	 */
 
 	public void setRoot(Spectator root) {
@@ -193,56 +192,9 @@ public class Event {
 			spectator = new Spectator(id, "", "", "", "", "", "");
 			spectator = root.getSpectatorById(spectator);
 			
-			if(spectator != null) {
-				spectator = new Spectator(spectator.getId(), spectator.getFirstName(), spectator.getLastName(), spectator.getEmail(), spectator.getGender(), spectator.getNationality(), spectator.getBirthdate());
-			}
 		}
 		
 		return spectator;
-	}	
-	
-	/**
-	 * <b>Description:</b> This method allows getting the spectator's successor in the BST of spectators.<br>
-	 * @param spectator The spectator that do you want to find the successor - spectator != null. 
-	 * @return The successor of the spectator if it exists, otherwise, it returns to the spectator.
-	 */
-	
-	public Spectator getSuccessor(Spectator spectator) {
-		
-		Spectator successor = null;
-				
-		if(spectator.getLeftChild() == null) {
-			
-			successor = spectator;
-		}
-		else {
-			
-			successor = getSuccessor(spectator.getLeftChild());
-		}
-		
-		return successor;
-	}
-	
-	/**
-	 * <b>Description:</b> This method allows getting the spectator's predecessor in the BST of spectators.<br>
-	 * @param spectator The spectator that do you want to find the predecessor - spectator != null. 
-	 * @return The predecessor of the spectator if it exists, otherwise, it returns to the spectator.
-	 */
-	
-	public Spectator getPredecessor(Spectator spectator) {
-		
-		Spectator predecessor = null;
-				
-		if(spectator.getRightChild() == null) {
-			
-			predecessor = spectator;
-		}
-		else {
-			
-			predecessor = getPredecessor(spectator.getRightChild());
-		}
-		
-		return predecessor;
 	}
 	
 	/**
@@ -295,5 +247,59 @@ public class Event {
 		}
 		
 		return size;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows deleting a spectator of the BST of spectators.<br>
+	 * <b>Post:</b> The spectator was deleted of the BST of spectators.<br>
+	 * @param spectator The spectator that will be deleted - spectator != null.
+	 */
+	
+	public void deleteSpectator(Spectator spectator) {
+		
+		Spectator tmp;
+		
+		if(spectator == root) {
+			
+			tmp = spectator.deleteSpectator();
+			
+			if(tmp == root) {
+				
+				setRoot(null);
+				
+			}
+			else {
+				
+				setRoot(tmp);
+			}
+		}
+		else {
+			
+			tmp = spectator.deleteSpectator();
+			Spectator father = getFather(spectator);
+			
+			if(spectator == father.getLeftChild()) {
+				
+				if(tmp == spectator) {
+					
+					father.setLeftChild(null);
+				}
+				else {
+					
+					father.setLeftChild(tmp);
+				}
+			}
+			else {
+				
+				if(tmp == spectator) {
+					
+					father.setRightChild(null);
+				}
+				else {
+					
+					father.setRightChild(tmp);
+				}
+			}
+		}
 	}
 }

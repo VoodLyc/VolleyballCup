@@ -54,6 +54,28 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		return rightChild;
 	}
 	
+//Setters
+	
+	/**
+	 * <b>Description:</b> This method allows setting the attribute leftChild.<br>
+	 * <b>Post:</b> The attribute leftChild will be replaced by the one that enters by parameter.<br>
+	 * @param leftChild The new leftChild.
+	 */
+	
+	public void setLeftChild(Spectator leftChild) {
+		this.leftChild = leftChild;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows setting the attribute rightChild.<br>
+	 * <b>Post:</b> The attribute rightChild will be replaced by the one that enters by parameter.<br>
+	 * @param rightChild The new rightChild.
+	 */
+	
+	public void setRightChild(Spectator rightChild) {
+		this.rightChild = rightChild;
+	}
+	
 //Methods
 	
 	/**
@@ -90,7 +112,7 @@ public class Spectator extends Person implements Comparable <Spectator> {
 	
 	public void addSpectator(Spectator spectator) throws InvalidIdException {
 		
-		if(this.compareTo(spectator) == 1) {
+		if(spectator.compareTo(this) == 1) {
 			
 			if(rightChild == null) {
 				
@@ -101,7 +123,7 @@ public class Spectator extends Person implements Comparable <Spectator> {
 				rightChild.addSpectator(spectator);
 			}
 		}
-		else if(this.compareTo(spectator) == -1) {
+		else if(spectator.compareTo(this) == -1) {
 			
 			if(leftChild == null) { 
 				
@@ -128,18 +150,18 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		
 		Spectator spectator1 = null;
 		
-		if(this.compareTo(spectator) == 0) {
+		if(spectator.compareTo(this) == 0) {
 			
 			spectator1 = this;
 		}
-		else if(this.compareTo(spectator) == 1) {
+		else if(spectator.compareTo(this) == 1) {
 			
 			if(rightChild != null) {
 				
 				spectator1 = rightChild.getSpectatorById(spectator);
 			}
 		}
-		else if(this.compareTo(spectator) == -1) {
+		else if(spectator.compareTo(this) == -1) {
 			
 			if(leftChild != null) {
 				
@@ -161,18 +183,18 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		
 		Spectator father = null;
 		
-		if(this.compareTo(spectator) == 0) {
+		if(spectator.compareTo(this) == 0) {
 			
 			father = root;
 		}
-		else if(this.compareTo(spectator) == 1) {
+		else if(spectator.compareTo(this) == 1) {
 			
 			if(rightChild != null) {
 				
 				father = rightChild.getFather(spectator, this);
 			}
 		}
-		else if(this.compareTo(spectator) == -1) {
+		else if(spectator.compareTo(this) == -1) {
 			
 			if(leftChild != null) {
 				
@@ -242,5 +264,84 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		}
 		
 		return size;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows re-adding a spectator to the BST of spectators.<br>
+	 * @return spectator If the spectator has two children return the right child, if has one child, return the child, if does not has a child return himself.
+	 */
+	
+	public Spectator deleteSpectator() {
+		
+		Spectator spectator = this;
+		
+		if(hasChildren(this)) {
+			
+			if(rightChild != null & leftChild != null) {
+				
+				spectator = rightChild;
+				
+				rightChild.reAddSpectator(leftChild);
+			}
+			else if(rightChild != null) {
+				
+				spectator = rightChild;
+			}
+			else if(leftChild != null) {
+				
+				spectator = leftChild;
+			}
+		}
+		return spectator;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows knowing if the spectator has children.<br>
+	 * @param spectator The spectator that do you want to know if has children.
+	 * @return True if the spectator has a child, false in otherwise.
+	 */
+	
+	public boolean hasChildren(Spectator spectator) {
+		
+		boolean hasChildren = false;
+		
+		if(spectator.getLeftChild() != null || spectator.getRightChild() != null) {
+			
+			hasChildren = true;
+		}
+		
+		return hasChildren;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows adding a spectator in the BST of spectators.<br>
+	 * <b>Post:</b> The spectator was added on the BST of spectators.<br>
+	 * @param spectator The spectator that will be added - spectator != null.
+	 */
+	
+	public void reAddSpectator(Spectator spectator) {
+		
+		if(spectator.compareTo(this) == 1) {
+			
+			if(rightChild == null) {
+				
+				rightChild = spectator;
+			}
+			else {
+				
+				rightChild.reAddSpectator(spectator);
+			}
+		}
+		else if(spectator.compareTo(this) == -1) {
+			
+			if(leftChild == null) { 
+				
+				leftChild = spectator;
+			}
+			else {
+				
+				leftChild.reAddSpectator(spectator);
+			}
+		}
 	}
 }

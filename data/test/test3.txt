@@ -1,0 +1,9 @@
+5,Sana,Minatozaki,minatozakisana@twice.com,F,Japan,12/29/1996
+9,Tzu-yu,Chou,choutzuyu@twice.com,F,Taiwan,6/24/1999
+2,Momo,Hirai,hiraimomo@twice.com,F,Japan,11/9/1996
+6,Na-yeon,Im,imnayeon@twice.com,F,South Korea,9/22/1995
+3,Jeong-yeon,Yoo,yoojeongyeon@twice.com,F,South Korea,11/1/1996
+1,Ji-hyo,Park,parkjihyo@twice.com,F,South Korea,2/1/1997
+7,Mina,Myoui,myouimina@twice.com,F,United States,3/24/1997
+4,Chae-young,Son,sonchaeyoung@twice.com,F,South Korea,4/23/1999
+8,Da-hyun,Kim,kimdahyun@twice.com,F,South Korea,5/28/1998

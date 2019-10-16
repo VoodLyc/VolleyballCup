@@ -76,6 +76,7 @@ class EventTest {
 		assertEquals("Jeong-yeon", event.getSpectatorById("3").getFirstName());
 		assertEquals("Da-hyun", event.getSpectatorById("8").getFirstName());
 		assertEquals("Chae-young", event.getSpectatorById("4").getFirstName());
+		assertEquals("Na-yeon", event.getRoot().getFirstName());
 		assertNull(event.getSpectatorById("0"));
 		assertNull(event.getSpectatorById("10"));
 		assertNull(event.getSpectatorById("134342"));
@@ -142,7 +143,103 @@ class EventTest {
 		assertEquals(event.getSpectatorById("6").getId(), event.getFather(event.getSpectatorById("3")).getId());
 		assertEquals(event.getSpectatorById("6").getId(), event.getFather(event.getSpectatorById("7")).getId());
 		assertNull(event.getFather(event.getSpectatorById("6")));
+		
 		event.setRoot(null);
+		
 		assertNull(event.getFather(event.getRoot()));
+	}
+	
+	@Test
+	void testDeleteSpectator() {
+		
+		setUpScenario2();
+		
+		event.deleteSpectator(event.getSpectatorById("6"));
+		assertEquals(event.getRoot(), event.getSpectatorById("7"));
+		assertEquals(event.getRoot().getLeftChild(), event.getSpectatorById("3"));
+		assertEquals(event.getRoot().getRightChild(), event.getSpectatorById("8"));
+		assertEquals(8, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("7"));
+		assertEquals(event.getRoot(), event.getSpectatorById("8"));
+		assertEquals(event.getRoot().getLeftChild(), event.getSpectatorById("3"));
+		assertEquals(event.getRoot().getRightChild(), event.getSpectatorById("9"));
+		assertEquals(7, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("8"));
+		assertEquals(event.getRoot(), event.getSpectatorById("9"));
+		assertEquals(event.getRoot().getLeftChild(), event.getSpectatorById("3"));
+		assertEquals(event.getRoot().getRightChild(), null);
+		assertEquals(6, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("9"));
+		assertEquals(event.getRoot(), event.getSpectatorById("3"));
+		assertEquals(event.getRoot().getLeftChild(), event.getSpectatorById("2"));
+		assertEquals(event.getRoot().getRightChild(), event.getSpectatorById("5"));
+		assertEquals(5, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("3"));
+		assertEquals(event.getRoot(), event.getSpectatorById("5"));
+		assertEquals(event.getRoot().getLeftChild(), event.getSpectatorById("4"));
+		assertEquals(event.getRoot().getRightChild(), null);
+		assertEquals(4, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("5"));
+		assertEquals(event.getRoot(), event.getSpectatorById("4"));
+		assertEquals(event.getRoot().getLeftChild(), event.getSpectatorById("2"));
+		assertEquals(event.getRoot().getRightChild(), null);
+		assertEquals(3, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("4"));
+		assertEquals(event.getRoot(), event.getSpectatorById("2"));
+		assertEquals(event.getRoot().getLeftChild(), event.getSpectatorById("1"));
+		assertEquals(event.getRoot().getRightChild(), null);
+		assertEquals(2, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("2"));
+		assertEquals(event.getRoot(), event.getSpectatorById("1"));
+		assertEquals(event.getRoot().getLeftChild(), null);
+		assertEquals(event.getRoot().getRightChild(), null);
+		assertEquals(1, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("1"));
+		assertEquals(event.getRoot(), null);
+		assertEquals(0, event.getSizeBST());
+		
+		event.loadData();
+		
+		event.deleteSpectator(event.getSpectatorById("4"));
+		assertEquals(event.getRoot(), event.getSpectatorById("6"));
+		assertEquals(event.getSpectatorById("5").getLeftChild(), null);
+		assertEquals(event.getSpectatorById("5").getRightChild(), null);
+		assertEquals(8, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("1"));
+		assertEquals(event.getRoot(), event.getSpectatorById("6"));
+		assertEquals(event.getSpectatorById("2").getLeftChild(), null);
+		assertEquals(event.getSpectatorById("2").getRightChild(), null);
+		assertEquals(7, event.getSizeBST());
+		
+		event.deleteSpectator(event.getSpectatorById("9"));
+		assertEquals(event.getRoot(), event.getSpectatorById("6"));
+		assertEquals(event.getSpectatorById("8").getLeftChild(), null);
+		assertEquals(event.getSpectatorById("8").getRightChild(), null);
+		assertEquals(6, event.getSizeBST());
+		
+		event.loadData();
+		
+		event.deleteSpectator(event.getSpectatorById("3"));
+		assertEquals(event.getRoot(), event.getSpectatorById("6"));
+		assertEquals(event.getSpectatorById("6").getLeftChild(), event.getSpectatorById("5"));
+		assertEquals(event.getSpectatorById("6").getRightChild(), event.getSpectatorById("7"));
+		assertEquals(8, event.getSizeBST());
+		
+		event.loadData();
+		
+		event.deleteSpectator(event.getSpectatorById("3"));
+		assertEquals(event.getRoot(), event.getSpectatorById("6"));
+		assertEquals(event.getSpectatorById("6").getLeftChild(), event.getSpectatorById("5"));
+		assertEquals(event.getSpectatorById("6").getRightChild(), event.getSpectatorById("7"));
+		assertEquals(8, event.getSizeBST());
 	}
 }
