@@ -61,4 +61,50 @@ public class Competitor extends Person {
 			next.addCompetitor(competitor);
 		}
 	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting the size of the doubly linked list of competitors.<br>
+	 * @return The size of the doubly linked list of competitors.
+	 */
+	
+	public int getSize() {
+		
+		int size = 0;
+		
+		if(next == null) {
+			
+			size = 1;
+		}
+		else {
+			
+			size = 1 + next.getSize();
+		}
+		
+		return size;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting a competitor of the doubly linked list of competitors.<br>
+	 * @param id The competitor's id.
+	 * @return The competitor if it could be found, otherwise return null.
+	 */
+	
+	public Competitor getCompetitorById(String id) {
+		
+		Competitor competitor = null;
+		
+		if(id.compareTo(this.getId())== 0){
+			
+			competitor = this;
+		}
+		else {
+			
+			if(next != null) {
+				
+				competitor = next.getCompetitorById(id);
+			}
+		}
+		
+		return competitor;
+	}
 }

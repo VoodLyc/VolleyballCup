@@ -36,6 +36,20 @@ class EventTest {
 		event.loadData();
 	}
 	
+	private void setUpScenario3() {
+		
+		try {
+			
+			event = new Event("data/test/test3.txt");
+			
+		} catch (InvalidPathException e) {
+			
+			e.printStackTrace();
+		}
+		
+		event.loadData();
+	}
+	
 	@Test
 	void testEvent() {
 		
@@ -234,12 +248,30 @@ class EventTest {
 		assertEquals(event.getSpectatorById("6").getRightChild(), event.getSpectatorById("7"));
 		assertEquals(8, event.getSizeBST());
 		
-		event.loadData();
+		setUpScenario3();
 		
-		event.deleteSpectator(event.getSpectatorById("3"));
-		assertEquals(event.getRoot(), event.getSpectatorById("6"));
-		assertEquals(event.getSpectatorById("6").getLeftChild(), event.getSpectatorById("5"));
-		assertEquals(event.getSpectatorById("6").getRightChild(), event.getSpectatorById("7"));
-		assertEquals(8, event.getSizeBST());
+		event.deleteSpectator(event.getSpectatorById("2"));
+		assertEquals(event.getRoot(), event.getSpectatorById("5"));
+		assertEquals(event.getSpectatorById("5").getLeftChild(), event.getSpectatorById("3"));
+		assertEquals(event.getSpectatorById("5").getRightChild(), event.getSpectatorById("9"));
+		assertEquals(9, event.getSizeBST());
+	}
+	
+	@Test
+	void testAddCompetitors() {
+		
+		setUpScenario3();
+		
+		event.addCompetitors();
+		
+		assertEquals(5, event.getSizeBST());
+		assertEquals(5, event.getSize());
+		
+		setUpScenario2();
+		
+		event.addCompetitors();
+		
+		assertEquals(5, event.getSizeBST());
+		assertEquals(4, event.getSize());
 	}
 }

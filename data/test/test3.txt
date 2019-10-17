@@ -7,3 +7,4 @@
 7,Mina,Myoui,myouimina@twice.com,F,United States,3/24/1997
 4,Chae-young,Son,sonchaeyoung@twice.com,F,South Korea,4/23/1999
 8,Da-hyun,Kim,kimdahyun@twice.com,F,South Korea,5/28/1998
+10,Da-hyun,Kim,kimdahyun@twice.com,F,South Korea,5/28/1998

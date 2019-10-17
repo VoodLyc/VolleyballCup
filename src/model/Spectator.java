@@ -344,4 +344,20 @@ public class Spectator extends Person implements Comparable <Spectator> {
 			}
 		}
 	}
+	
+	@Override
+	public String toString() {
+		
+		String toString = "";
+		
+		toString += "Id: " + getId() + "\n";
+		toString += "First name: " + getFirstName() + "\n";
+		toString += "Last name: " + getLastName() + "\n";
+		toString += "Email: " + getEmail() + "\n";
+		toString += "Gender: " + getGender() + "\n";
+		toString += "Country: " + getNationality() + "\n";
+		toString += "Birthdate: " + getBirthdate() + "\n";
+		
+		return toString;
+	}
 }

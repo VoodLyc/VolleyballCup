@@ -302,4 +302,71 @@ public class Event {
 			}
 		}
 	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting the size of the doubly linked list of competitors.<br>
+	 * @return The size of the doubly linked list of competitors.
+	 */
+	
+	public int getSize() {
+		
+		int size = 0;
+		
+		if(first != null) {
+			
+			size = first.getSize();
+		}
+		
+		return size;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows adding randomly in the doubly linked list of competitors the 50% of the spectators in the BST of spectators as competitors.<br>
+	 * <b>Post:</b> The competitors was added in the doubly linked list of competitors.<br>
+	 */
+	
+	public void addCompetitors() {
+		
+		int sizeBST = (getSizeBST() / 2);
+		int counter = 0;
+		
+		while(counter < sizeBST) {
+			
+			Spectator tmp = selectRandomSpectator();
+			deleteSpectator(tmp);
+			addCompetitor(new Competitor(tmp.getId(), tmp.getFirstName(), tmp.getLastName(), tmp.getEmail(), tmp.getGender(), tmp.getNationality(), tmp.getBirthdate()));
+			counter++;
+		}
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows showing a spectator and the time that took found it.<br>
+	 * @param id The spectator id.
+	 * @return The spectator's attributes and the time that took found it.
+	 */
+	
+	public String searchSpectator(String id) {
+		
+		String msg = "";
+		long t1, t2, delta;
+		
+		t1 = System.nanoTime();
+		
+		Spectator spectator = getSpectatorById(id);
+		
+		t2 = System.nanoTime();
+		
+		delta = t2 - t1;
+		
+		if(spectator != null) {
+			
+			msg = spectator.toString() + "\n";
+			msg += "The search took: " + delta + "ns";
+		}else {
+			
+			msg = "The spectator couldn't be found.\n\nThe search took: " + delta + "ns";
+		}
+		
+		return msg;
+	}
 }

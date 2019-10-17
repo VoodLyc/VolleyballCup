@@ -179,4 +179,28 @@ public abstract class Person {
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
+
+//Methods
+	
+	/**
+	 * <b>Description:</b> This method converting the person's attributes in a String.<br>
+	 * @return A String wit the person's attributes.
+	 */
+	
+	@Override
+	public String toString() {
+		
+		String toString = "";
+		
+		toString += "Id: " + getId() + "\n";
+		toString += "First name: " + getFirstName() + "\n";
+		toString += "Last name: " + getLastName() + "\n";
+		toString += "Email: " + getEmail() + "\n";
+		toString += "Gender: " + getGender() + "\n";
+		toString += "Country: " + getNationality() + "\n";
+		toString += "Birthdate: " + getBirthdate() + "\n";
+		
+		return toString;
+	}
+	
 }
