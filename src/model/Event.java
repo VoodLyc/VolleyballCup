@@ -369,4 +369,22 @@ public class Event {
 		
 		return msg;
 	}
+	
+	/**
+	 * <b>Description:</b> This method allows getting a competitor of the doubly linked list of competitors.<br>
+	 * @param id The competitor's id.
+	 * @return The competitor if it could be found, otherwise return null.
+	 */
+	
+	public Competitor getCompetitorById(String id) {
+		
+		Competitor competitor = null;
+		
+		if(first != null) {
+			
+			competitor = first.getCompetitorById(id);
+		}
+		
+		return competitor;
+	}
 }

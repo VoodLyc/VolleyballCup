@@ -1,6 +1,8 @@
 package test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import model.Competitor;
 import model.Event;
 import model.InvalidIdException;
 import model.InvalidPathException;
@@ -48,6 +50,25 @@ class EventTest {
 		}
 		
 		event.loadData();
+	}
+	
+	private void setUpScenario4() {
+		
+		try {
+			
+			event = new Event("data/test/test3.txt");
+			
+		} catch (InvalidPathException e) {
+			
+			e.printStackTrace();
+		}
+		
+		event.loadData();
+		
+		event.addCompetitor(new Competitor("9","Tzu-yu","Chou","choutzuyu@twice.com","F","Taiwan","6/24/1999"));
+		event.addCompetitor(new Competitor("2","Momo","Hirai","hiraimomo@twice.com","F","Japan","11/9/1996"));
+		event.addCompetitor(new Competitor("6","Na-yeon","Im","imnayeon@twice.com","F","South Korea","9/22/1995"));
+		event.addCompetitor(new Competitor("3","Jeong-yeon","Yoo","yoojeongyeon@twice.com","F","South Korea","11/1/1996"));
 	}
 	
 	@Test
@@ -273,5 +294,247 @@ class EventTest {
 		
 		assertEquals(5, event.getSizeBST());
 		assertEquals(4, event.getSize());
+	}
+	
+	@Test
+	void testGetCompetitorById() {
+		
+		setUpScenario4();
+		
+		assertEquals("3", event.getCompetitorById("3").getId());
+		assertEquals("2", event.getCompetitorById("2").getId());
+		assertEquals("9", event.getCompetitorById("9").getId());
+		assertEquals("6", event.getCompetitorById("6").getId());
+		assertNull(event.getCompetitorById("224"));
+		assertNull(event.getCompetitorById("-224"));
+		
+		event.setFirst(null);
+		
+		assertNull(event.getCompetitorById("-224"));
+	}
+	
+	@Test
+	void testSearchSpectator() {
+		
+		setUpScenario2();
+		
+		String msg, id, firstName, lastName, email, gender, country, birthdate, search;
+		String[] lines, value, data;
+		
+		msg = event.searchSpectator("2");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("2", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Momo", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Hirai", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("hiraimomo@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1];
+		
+		assertEquals("Japan", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("11/9/1996", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchSpectator("1");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("1", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Ji-hyo", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Park", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("parkjihyo@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1] + " " + data[2];
+		
+		assertEquals("South Korea", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("2/1/1997", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchSpectator("9");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("9", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Tzu-yu", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Chou", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("choutzuyu@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1];
+		
+		assertEquals("Taiwan", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("6/24/1999", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchSpectator("5");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("5", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Sana", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Minatozaki", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("minatozakisana@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1];
+		
+		assertEquals("Japan", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("12/29/1996", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchSpectator("45");
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = lines[0];
+	
+		assertEquals("The spectator couldn't be found.", search);
+		
+		search = value[0];
+		
+		assertEquals("The search took", search);
 	}
 }

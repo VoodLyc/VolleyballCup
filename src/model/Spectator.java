@@ -214,7 +214,7 @@ public class Spectator extends Person implements Comparable <Spectator> {
 		
 		Spectator spectator;
 		
-		if((int)(Math.random() * 100) >= 10) {
+		if((int)(Math.random() * 100) <= 10) {
 			
 			spectator = this;
 		}
