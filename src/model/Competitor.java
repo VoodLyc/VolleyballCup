@@ -107,4 +107,47 @@ public class Competitor extends Person {
 		
 		return competitor;
 	}
+	
+	/**
+	 * <b>Description:</b> This method converting the competitor's attributes in a String.<br>
+	 * @return A String wit the competitor's attributes.
+	 */
+	
+	public String showCompetitor() {
+		
+		String msg = "| ID: " + getId() + 
+				", FIRST NAME: " + getFirstName() + 
+				", LAST NAME: " + getLastName() + 
+				", EMAIL: " + getEmail() + 
+				", GENDER: " + getGender() + 
+				", COUNTRY: " + getNationality() + 
+				", BIRTHDATE: " + getBirthdate() + " | -------> ";
+		
+		return msg;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows showing all the competitors of a country.<br>
+	 * @param country The country.
+	 * @return A message with all the competitor of that country.
+	 */
+	
+	public String showCompetitorsByCountry(String country) {
+		
+		String msg = "";
+		StringBuilder msg2 = new StringBuilder();
+		
+		if(country.equals(getNationality())) {
+			
+			msg2.append(showCompetitor());
+		}
+		if(next != null) {
+			
+			msg2.append(next.showCompetitorsByCountry(country));
+		}
+		
+		msg = msg2.toString();
+		
+		return msg;
+	}
 }

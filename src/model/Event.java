@@ -341,7 +341,7 @@ public class Event {
 	
 	/**
 	 * <b>Description:</b> This method allows showing a spectator and the time that took found it.<br>
-	 * @param id The spectator id.
+	 * @param id The spectator's id.
 	 * @return The spectator's attributes and the time that took found it.
 	 */
 	
@@ -371,6 +371,37 @@ public class Event {
 	}
 	
 	/**
+	 * <b>Description:</b> This method allows showing a competitor and the time that took found it.<br>
+	 * @param id The competitor's id.
+	 * @return The competito's attributes and the time that took found it.
+	 */
+	
+	public String searchCompetitor(String id) {
+		
+		String msg = "";
+		long t1, t2, delta;
+		
+		t1 = System.nanoTime();
+		
+		Competitor competitor = getCompetitorById(id);
+		
+		t2 = System.nanoTime();
+		
+		delta = t2 - t1;
+		
+		if(competitor != null) {
+			
+			msg = competitor.toString() + "\n";
+			msg += "The search took: " + delta + "ns";
+		}else {
+			
+			msg = "The competitor couldn't be found.\n\nThe search took: " + delta + "ns";
+		}
+		
+		return msg;
+	}
+	
+	/**
 	 * <b>Description:</b> This method allows getting a competitor of the doubly linked list of competitors.<br>
 	 * @param id The competitor's id.
 	 * @return The competitor if it could be found, otherwise return null.
@@ -386,5 +417,23 @@ public class Event {
 		}
 		
 		return competitor;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows showing all the competitors of a country.<br>
+	 * @param country The country.
+	 * @return A message with all the competitor of that country.
+	 */
+	
+	public String showCompetitorsByCountry(String country) {
+		
+		String msg = "";
+		
+		if(first != null) {
+			
+			msg = first.showCompetitorsByCountry(country);
+		}
+		
+		return msg;
 	}
 }

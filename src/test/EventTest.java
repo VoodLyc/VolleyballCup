@@ -71,6 +71,49 @@ class EventTest {
 		event.addCompetitor(new Competitor("3","Jeong-yeon","Yoo","yoojeongyeon@twice.com","F","South Korea","11/1/1996"));
 	}
 	
+	private void setUpScenario5() {
+		
+		try {
+			
+			event = new Event("data/test/test3.txt");
+			
+		} catch (InvalidPathException e) {
+			
+			e.printStackTrace();
+		}
+		
+		event.loadData();
+		
+		event.addCompetitor(new Competitor("9","Tzu-yu","Chou","choutzuyu@twice.com","F","Taiwan","6/24/1999"));
+		event.addCompetitor(new Competitor("2","Momo","Hirai","hiraimomo@twice.com","F","Japan","11/9/1996"));
+		event.addCompetitor(new Competitor("5","Sana","Minatozaki","minatozakisana@twice.com","F","Japan","12/29/1996"));
+		event.addCompetitor(new Competitor("1","Ji-hyo","Park","parkjihyo@twice.com","F","South Korea","2/1/1997"));
+	}
+	
+	private void setUpScenario6() {
+		
+		try {
+			
+			event = new Event("data/test/test3.txt");
+			
+		} catch (InvalidPathException e) {
+			
+			e.printStackTrace();
+		}
+		
+		event.loadData();
+		
+		event.addCompetitor(new Competitor("6","Na-yeon","Im","imnayeon@twice.com","F","South Korea","9/22/1995"));
+		event.addCompetitor(new Competitor("3","Jeong-yeon","Yoo","yoojeongyeon@twice.com","F","South Korea","11/1/1996"));
+		event.addCompetitor(new Competitor("7","Mina","Myoui","myouimina@twice.com","F","United States","3/24/1997"));
+		event.addCompetitor(new Competitor("8","Da-hyun","Kim","kimdahyun@twice.com","F","South Korea","5/28/1998"));
+		event.addCompetitor(new Competitor("4","Chae-young","Son","sonchaeyoung@twice.com","F","South Korea","4/23/1999"));
+		event.addCompetitor(new Competitor("9","Tzu-yu","Chou","choutzuyu@twice.com","F","Taiwan","6/24/1999"));
+		event.addCompetitor(new Competitor("2","Momo","Hirai","hiraimomo@twice.com","F","Japan","11/9/1996"));
+		event.addCompetitor(new Competitor("5","Sana","Minatozaki","minatozakisana@twice.com","F","Japan","12/29/1996"));
+		event.addCompetitor(new Competitor("1","Ji-hyo","Park","parkjihyo@twice.com","F","South Korea","2/1/1997"));
+	}
+	
 	@Test
 	void testEvent() {
 		
@@ -536,5 +579,261 @@ class EventTest {
 		search = value[0];
 		
 		assertEquals("The search took", search);
+	}
+	
+	@Test
+	void testSearchCompetitor() {
+		
+		setUpScenario5();
+		
+		String msg, id, firstName, lastName, email, gender, country, birthdate, search;
+		String[] lines, value, data;
+		
+		msg = event.searchCompetitor("9");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("9", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Tzu-yu", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Chou", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("choutzuyu@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1];
+		
+		assertEquals("Taiwan", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("6/24/1999", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchCompetitor("1");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("1", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Ji-hyo", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Park", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("parkjihyo@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1] + " " + data[2];
+		
+		assertEquals("South Korea", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("2/1/1997", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchCompetitor("2");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("2", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Momo", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Hirai", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("hiraimomo@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1];
+		
+		assertEquals("Japan", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("11/9/1996", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchCompetitor("5");
+		
+		lines = msg.split("\n");
+		value = lines[0].split(":");
+		data = value[1].split(" ");
+		id = data[1];
+		
+		assertEquals("5", id);
+		
+		value = lines[1].split(":");
+		data = value[1].split(" ");
+		firstName = data[1];
+		
+		assertEquals("Sana", firstName);
+		
+		value = lines[2].split(":");
+		data = value[1].split(" ");
+		lastName = data[1];
+		
+		assertEquals("Minatozaki", lastName);
+		
+		value = lines[3].split(":");
+		data = value[1].split(" ");
+		email = data[1];
+		
+		assertEquals("minatozakisana@twice.com", email);
+		
+		value = lines[4].split(":");
+		data = value[1].split(" ");
+		gender = data[1];
+		
+		assertEquals("F", gender);
+		
+		value = lines[5].split(":");
+		data = value[1].split(" ");
+		country = data[1];
+		
+		assertEquals("Japan", country);
+		
+		value = lines[6].split(":");
+		data = value[1].split(" ");
+		birthdate = data[1];
+		
+		assertEquals("12/29/1996", birthdate);
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = value[0];
+		
+		assertEquals("The search took", search);
+		
+		msg = event.searchCompetitor("90");
+		
+		lines = msg.split("\n\n");
+		value = lines[1].split(":");
+		search = lines[0];
+	
+		assertEquals("The competitor couldn't be found.", search);
+		
+		search = value[0];
+		
+		assertEquals("The search took", search);
+	}
+	
+	@Test
+	void testShowCompetitorByCountry() {
+		
+		setUpScenario6();
+		
+		String msg;
+		String[] lines;
+		
+		msg = event.showCompetitorsByCountry("South Korea");
+		
+		lines = msg.split("------->");
+		
+		assertEquals("| ID: 6, FIRST NAME: Na-yeon, LAST NAME: Im, EMAIL: imnayeon@twice.com, GENDER: F, COUNTRY: South Korea, BIRTHDATE: 9/22/1995 | ", lines[0]);
+		assertEquals(" | ID: 3, FIRST NAME: Jeong-yeon, LAST NAME: Yoo, EMAIL: yoojeongyeon@twice.com, GENDER: F, COUNTRY: South Korea, BIRTHDATE: 11/1/1996 | ", lines[1]);
+		assertEquals(" | ID: 8, FIRST NAME: Da-hyun, LAST NAME: Kim, EMAIL: kimdahyun@twice.com, GENDER: F, COUNTRY: South Korea, BIRTHDATE: 5/28/1998 | ", lines[2]);
+		assertEquals(" | ID: 4, FIRST NAME: Chae-young, LAST NAME: Son, EMAIL: sonchaeyoung@twice.com, GENDER: F, COUNTRY: South Korea, BIRTHDATE: 4/23/1999 | ", lines[3]);
+		assertEquals(" | ID: 1, FIRST NAME: Ji-hyo, LAST NAME: Park, EMAIL: parkjihyo@twice.com, GENDER: F, COUNTRY: South Korea, BIRTHDATE: 2/1/1997 | ", lines[4]);
+		
+		
+		msg = event.showCompetitorsByCountry("England");
+		
+		assertEquals("", msg);
+		
+		msg = event.showCompetitorsByCountry("Japan");
+		
+		lines = msg.split("------->");
+		
+		assertEquals("| ID: 2, FIRST NAME: Momo, LAST NAME: Hirai, EMAIL: hiraimomo@twice.com, GENDER: F, COUNTRY: Japan, BIRTHDATE: 11/9/1996 | ", lines[0]);
+		assertEquals(" | ID: 5, FIRST NAME: Sana, LAST NAME: Minatozaki, EMAIL: minatozakisana@twice.com, GENDER: F, COUNTRY: Japan, BIRTHDATE: 12/29/1996 | ", lines[1]);
 	}
 }
