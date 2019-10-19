@@ -836,12 +836,14 @@ class EventTest {
 	}
 	
 	@Test
-	void testCreateBSTByCountry() {
+	void testShowSpectatorsByCountry() {
 	
-		
 		setUpScenario2();
 		
-		System.out.println(event.showSpectatorsByCountry("South Korea"));
-
+		assertNotNull(event.showSpectatorsByCountry("Japan"));
+		
+		event.setRoot(null);
+		
+		assertEquals("", event.showSpectatorsByCountry("Japan"));
 	}
 }

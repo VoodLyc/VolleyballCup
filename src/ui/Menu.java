@@ -62,7 +62,7 @@ public class Menu {
 				
 			case 4:
 				
-				
+				showSpectatorsByCountryMenu();
 				
 				break;
 				
@@ -171,6 +171,16 @@ public class Menu {
 		country = scanner.nextLine();
 		
 		System.out.println(event.showCompetitorsByCountry(country) + "\n");
+	}
+	
+	public void showSpectatorsByCountryMenu() {
+
+		String country;
+		
+		System.out.println("Please enter the country");
+		country = scanner.nextLine();
+		
+		System.out.println(event.showSpectatorsByCountry(country) + "\n");
 	}
 
 

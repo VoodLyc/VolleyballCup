@@ -490,9 +490,6 @@ public class Event {
 		
 		Spectator root = getSpectatorsByCountry(country);
 		
-		System.out.println(root.getFirstName());
-		System.out.println(root.getLeftChild().getFirstName());
-		System.out.println(root.getRightChild().getFirstName());
 		String msg = "";
 		
 		if(root != null) {
