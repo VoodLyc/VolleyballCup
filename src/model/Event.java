@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
 * <b>Description:</b> The class Event in the package model.<br>
@@ -333,7 +334,7 @@ public class Event {
 		while(counter < sizeBST) {
 			
 			Spectator tmp = selectRandomSpectator();
-			deleteSpectator(tmp);
+//			deleteSpectator(tmp);
 			addCompetitor(new Competitor(tmp.getId(), tmp.getFirstName(), tmp.getLastName(), tmp.getEmail(), tmp.getGender(), tmp.getNationality(), tmp.getBirthdate()));
 			counter++;
 		}
@@ -432,6 +433,71 @@ public class Event {
 		if(first != null) {
 			
 			msg = first.showCompetitorsByCountry(country);
+		}
+		
+		return msg;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows returning an ArrayList with all the spectator of the country.<br>
+	 * @param country The spectator's country.
+	 * @return An ArrayList with all the spectator of that country.
+	 */
+	
+	public ArrayList<Spectator> createBSTByCountry(String country) {
+		
+		ArrayList<Spectator> spectators = new ArrayList<Spectator>();
+		
+		if(root != null) {
+			
+			spectators = root.createBSTByCountry(country);
+		}
+		
+		return spectators;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows creating a new BST with all the spectators of that country.<br>
+	 * @param country The spectator's country.
+	 * @return The root of the new BST of spectator of that country.
+	 */
+	
+	public Spectator getSpectatorsByCountry(String country) {
+		
+		ArrayList<Spectator> spectators = createBSTByCountry(country);
+		Spectator first = null;
+		
+		if(!spectators.isEmpty()) {
+			
+			first = spectators.get(0);
+			
+			for(Spectator s : spectators) {
+				
+				first.reAddSpectator(s);
+			}
+		}
+		
+		return first;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows showing the spectators of the BST of spectators.<br>
+	 * @param country The spectato's country.
+	 * @return A message with all the spectators of that country.
+	 */
+	
+	public String showSpectatorsByCountry(String country) {
+		
+		Spectator root = getSpectatorsByCountry(country);
+		
+		System.out.println(root.getFirstName());
+		System.out.println(root.getLeftChild().getFirstName());
+		System.out.println(root.getRightChild().getFirstName());
+		String msg = "";
+		
+		if(root != null) {
+			
+			msg = root.showSpectators(0);
 		}
 		
 		return msg;

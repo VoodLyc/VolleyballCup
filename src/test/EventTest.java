@@ -328,14 +328,12 @@ class EventTest {
 		
 		event.addCompetitors();
 		
-		assertEquals(5, event.getSizeBST());
 		assertEquals(5, event.getSize());
 		
 		setUpScenario2();
 		
 		event.addCompetitors();
 		
-		assertEquals(5, event.getSizeBST());
 		assertEquals(4, event.getSize());
 	}
 	
@@ -835,5 +833,15 @@ class EventTest {
 		
 		assertEquals("| ID: 2, FIRST NAME: Momo, LAST NAME: Hirai, EMAIL: hiraimomo@twice.com, GENDER: F, COUNTRY: Japan, BIRTHDATE: 11/9/1996 | ", lines[0]);
 		assertEquals(" | ID: 5, FIRST NAME: Sana, LAST NAME: Minatozaki, EMAIL: minatozakisana@twice.com, GENDER: F, COUNTRY: Japan, BIRTHDATE: 12/29/1996 | ", lines[1]);
+	}
+	
+	@Test
+	void testCreateBSTByCountry() {
+	
+		
+		setUpScenario2();
+		
+		System.out.println(event.showSpectatorsByCountry("South Korea"));
+
 	}
 }

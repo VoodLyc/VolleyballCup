@@ -110,7 +110,7 @@ public class Competitor extends Person {
 	
 	/**
 	 * <b>Description:</b> This method converting the competitor's attributes in a String.<br>
-	 * @return A String wit the competitor's attributes.
+	 * @return A String with the competitor's attributes.
 	 */
 	
 	public String showCompetitor() {

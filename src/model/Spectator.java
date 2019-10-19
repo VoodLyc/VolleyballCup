@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 /**
 * <b>Description:</b> The class Spectator in the package model.<br>
 * @author Johan Giraldo.
@@ -343,5 +345,82 @@ public class Spectator extends Person implements Comparable <Spectator> {
 				leftChild.reAddSpectator(spectator);
 			}
 		}
+	}
+	
+	/**
+	 * <b>Description:</b> This method converting the spectator's attributes in a String.<br>
+	 * @return A String with the spectator's attributes.
+	 */
+	
+	public String showSpectator() {
+		
+		String msg = "| ID: " + getId() + 
+				", FIRST NAME: " + getFirstName() + 
+				", LAST NAME: " + getLastName() + 
+				", EMAIL: " + getEmail() + 
+				", GENDER: " + getGender() + 
+				", COUNTRY: " + getNationality() + 
+				", BIRTHDATE: " + getBirthdate() + " |        ";
+		
+		return msg;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows returning an ArrayList with all the spectator of the country.<br>
+	 * @param country The spectator's country.
+	 * @return An ArrayList with all the spectator of that country.
+	 */
+	
+	public ArrayList<Spectator> createBSTByCountry(String country) {
+		
+		ArrayList<Spectator> spectators = new ArrayList<Spectator>();
+		
+		if(getNationality().equals(country)) {
+			
+			spectators.add(new Spectator(getId(), getFirstName(), getLastName(), getEmail(), getGender(), getNationality(), getBirthdate()));
+			
+		}
+		if(leftChild != null) {
+			
+			spectators.addAll(leftChild.createBSTByCountry(country));
+		}
+		if(rightChild != null) {
+			
+			spectators.addAll(rightChild.createBSTByCountry(country));
+		}
+		
+		return spectators;
+	}
+	
+	/**
+	 * <b>Description:</b> This method allows showing the spectators of the BST of spectators.<br>
+	 * @param level The BST actual level.
+	 * @return A message with all the spectators.
+	 */
+	
+	public String showSpectators(int level) {
+		
+		String spectators = "";
+		StringBuilder spectators2 = new StringBuilder();
+		
+		for(int i = 0; i < level; i++) {
+			
+			spectators2.append("        ");
+		}
+		
+		spectators2.append(showSpectator() + "\n\n");
+		
+		if(leftChild != null) {
+			
+			spectators2.append(leftChild.showSpectators(level + 1));
+		}
+		if(rightChild != null) {
+			
+			spectators2.append(rightChild.showSpectators(level + 1));
+		}
+		
+		spectators = spectators2.toString();
+		
+		return spectators;
 	}
 }
