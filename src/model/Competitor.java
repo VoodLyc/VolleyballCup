@@ -150,4 +150,8 @@ public class Competitor extends Person {
 		
 		return msg;
 	}
+
+	public Competitor getNext() {
+		return next;
+	}
 }

@@ -198,6 +198,72 @@ public class Event {
 		return spectator;
 	}
 	
+	public Competitor getCharacter(int index) {
+		
+		Competitor character = getFirst();
+		int counter = 0;
+		
+		while(counter < index) {
+			
+			character = character.getNext();
+			counter++;
+		}
+		
+		return character;
+	}
+	
+	public int getSizeIterative() {
+		
+		int size = 0;
+		Competitor tmp = getFirst();
+		
+		if(tmp != null) {
+			
+			size++;
+			
+			while((tmp = tmp.getNext()) != null) {
+				
+				size++;
+			}
+		}
+		
+		return size;
+	}
+	
+	public Competitor getCompetitorByIdIterative(String id) {
+		
+		Competitor character = null;
+		boolean running = true;
+		
+		for(int i = 0; i < getSizeIterative() && running; i++) {
+			
+			if(getCharacter(i).getId().equals(id)) {
+				
+				character = getCharacter(i);
+				running = false;
+			}
+		}
+		
+		return character;
+	}
+	
+	public String showCompetitorsByCountryIterative(String country) {
+		
+		String msg;
+		StringBuilder msg2 = new StringBuilder();
+		
+		for(int i = 0; i < getSizeIterative(); i++) {
+			
+			if(getCharacter(i).getNationality().equals(country)) {
+				
+				msg2.append(getCharacter(i).showCompetitor());
+			}
+		}
+		
+		msg = msg2.toString();
+		return msg;
+	}
+	
 	/**
 	 * <b>Description:</b> This method allows getting a random spectator of the BST of spectators.<br>
 	 * @return a random spectator of the BST of spectators, if the BST is empty, return null.
@@ -384,7 +450,7 @@ public class Event {
 		
 		t1 = System.nanoTime();
 		
-		Competitor competitor = getCompetitorById(id);
+		Competitor competitor = getCompetitorByIdIterative(id);
 		
 		t2 = System.nanoTime();
 		

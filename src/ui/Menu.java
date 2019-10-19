@@ -170,7 +170,7 @@ public class Menu {
 		System.out.println("Please enter the country");
 		country = scanner.nextLine();
 		
-		System.out.println(event.showCompetitorsByCountry(country) + "\n");
+		System.out.println(event.showCompetitorsByCountryIterative(country) + "\n");
 	}
 	
 	public void showSpectatorsByCountryMenu() {
